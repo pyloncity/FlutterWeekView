@@ -166,35 +166,39 @@ class EventDrawProperties {
     if (dayView.dragAndDropOptions != null) {
       DragAndDropOptions options = dayView.dragAndDropOptions!;
 
-      child = _getDraggableOrLongPressDraggable(
-        isLongPress: options.startingGesture == DragStartingGesture.longPress,
-        data: event,
-        axis: options.allowOnlyVerticalDrag ? Axis.vertical : null,
-        feedback: SizedBox(
-          height: height!,
-          width: width!,
-          child: child,
-        ),
-        childWhenDragging: Opacity(opacity: 0.5, child: child),
-        child: child,
-      );
-    }
-
-    // If resizing is enabled, we create a Stack where the bottom is a
-    // transparent widget which handles the resizing.
-    if (resizeGestureDetector != null) {
-      child = Stack(
-        children: [
-          Positioned.fill(child: child),
-          Positioned(
-            left: 0,
-            right: 0,
-            bottom: 0,
-            height: 20,
-            child: resizeGestureDetector,
+      if (event.title == 'Reserved') {
+        child = _getDraggableOrLongPressDraggable(
+          isLongPress: options.startingGesture == DragStartingGesture.longPress,
+          data: event,
+          axis: options.allowOnlyVerticalDrag ? Axis.vertical : null,
+          feedback: SizedBox(
+            height: height!,
+            width: width!,
+            child: child,
           ),
-        ],
-      );
+          childWhenDragging: Opacity(opacity: 0.5, child: child),
+          child: child,
+        );
+
+        // If resizing is enabled, we create a Stack where the bottom is a
+        // transparent widget which handles the resizing.
+        if (resizeGestureDetector != null) {
+          child = Stack(
+            children: [
+              Positioned.fill(child: child),
+              Positioned(
+                left: 0,
+                right: 0,
+                bottom: 0,
+                height: 20,
+                child: resizeGestureDetector,
+              ),
+            ],
+          );
+        }
+      } else {
+        child = child;
+      }
     }
 
     return Positioned(
