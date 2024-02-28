@@ -166,7 +166,7 @@ class EventDrawProperties {
     if (dayView.dragAndDropOptions != null) {
       DragAndDropOptions options = dayView.dragAndDropOptions!;
 
-      if (event.title == 'Reserved') {
+      if (event.title != 'Reserved') {
         child = _getDraggableOrLongPressDraggable(
           isLongPress: options.startingGesture == DragStartingGesture.longPress,
           data: event,
