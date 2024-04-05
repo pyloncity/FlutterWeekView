@@ -189,8 +189,8 @@ class EventDrawProperties {
               Positioned(
                 left: 0,
                 right: 0,
-                bottom: -10,
-                height: 40,
+                bottom: -25,
+                height: 50,
                 child: resizeGestureDetector,
               ),
             ],
